@@ -1,0 +1,198 @@
+.App {
+  box-sizing: border-box;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  /* Dark mode with gradient background */
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0d1122 100%);
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  padding: 24px;
+  color: #e6eef8; /* light text for contrast on dark bg */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+h1 {
+  background: linear-gradient(135deg, #00d9ff 0%, #0099ff 50%, #6f0fff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 24px;
+  font-weight: 600;
+  font-size: 2.5rem;
+}
+
+.widget-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.widget {
+  box-sizing: border-box;
+  flex: 1 1 260px; /* allow widgets to grow and shrink responsively */
+  min-width: 220px;
+  min-height: 120px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1a1f3a 0%, #2a2f4a 100%);
+  color: #e6eef8;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  padding: 16px;
+  box-shadow: 0 8px 32px rgba(0, 217, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.widget::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.widget:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 48px rgba(0, 217, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: rgba(111, 15, 255, 0.4);
+  background: linear-gradient(135deg, #2a2f4a 0%, #3a3f5a 100%);
+}
+
+.widget:hover::before {
+  left: 100%;
+}
+
+.widget.temperature {
+  border-color: rgba(255, 99, 132, 0.3);
+}
+
+.widget.temperature:hover {
+  border-color: rgba(255, 99, 132, 0.6);
+  box-shadow: 0 12px 48px rgba(255, 99, 132, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.widget.humidity {
+  border-color: rgba(54, 162, 235, 0.3);
+}
+
+.widget.humidity:hover {
+  border-color: rgba(54, 162, 235, 0.6);
+  box-shadow: 0 12px 48px rgba(54, 162, 235, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.widget.gas {
+  border-color: rgba(255, 193, 7, 0.3);
+}
+
+.widget.gas:hover {
+  border-color: rgba(255, 193, 7, 0.6);
+  box-shadow: 0 12px 48px rgba(255, 193, 7, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.widget.motion {
+  border-color: rgba(75, 192, 75, 0.3);
+}
+
+.widget.motion:hover {
+  border-color: rgba(75, 192, 75, 0.6);
+  box-shadow: 0 12px 48px rgba(75, 192, 75, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.widget h2 {
+  font-size: 0.95rem;
+  margin: 0;
+  color: #a0a8c8; /* muted label */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.widget p.value {
+  font-size: 2.6rem;
+  margin: 6px 0 12px 0;
+  font-weight: 700;
+  background: linear-gradient(135deg, #00d9ff 0%, #0099ff 50%, #6f0fff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.widget p.small {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #7a8298;
+}
+
+.widget canvas {
+  width: 100% !important;
+  height: 92px !important; /* compact chart height to match screenshot */
+  align-self: center;
+}
+
+/* specific spacing tweaks for different widget types if needed */
+.widget .chart-area {
+  margin-top: 8px;
+}
+
+/* Top metrics row */
+
+.metrics-row {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 18px;
+  width: 100%;
+  align-items: stretch;
+}
+
+.metrics-row .widget.metric-card {
+  flex: 1 1 220px; /* each metric card takes equal available space */
+  min-width: 200px;
+  min-height: 120px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1f3a 0%, #2a2f4a 100%);
+}
+
+.metrics-row .widget.metric-card p.value {
+  font-size: 2.8rem;
+  margin: 8px 0;
+}
+
+/* Bottom charts row */
+.charts-row {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.charts-row .widget {
+  flex: 1 1 220px; /* charts stretch to fill row evenly */
+  min-height: 300px;
+  padding: 12px 14px;
+}
+
+.charts-row .widget h2 {
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+}
+
+.charts-row .widget p.value {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.charts-row .widget p.small {
+  margin-top: 8px;
+}
